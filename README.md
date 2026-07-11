@@ -48,9 +48,10 @@ jobs:
       tinytex_packages: "pgf pgfplots xcolor patterns"
 ```
 
-Inputs disponíveis: `needs_python`, `needs_r`, `r_version`, `r_packages`,
-`needs_magick_system_deps`, `needs_pdf2svg`, `needs_tinytex`,
-`tinytex_packages`.
+Inputs disponíveis: `needs_python`, `python_version`, `python_packages`
+(ignorado se houver `requirements.txt` no repo), `needs_r`, `r_version`,
+`r_packages`, `needs_magick_system_deps`, `needs_pdf2svg`, `needs_tinytex`,
+`tinytex_packages`, `output_dir` (padrão `_site`).
 
 **Importante:** no GitHub, em Settings → Pages, a fonte precisa estar
 configurada como "GitHub Actions" (não "Deploy from a branch").

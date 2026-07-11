@@ -6,6 +6,13 @@ on:
       needs_python:
         type: boolean
         default: false
+      python_version:
+        type: string
+        default: "3.11"
+      python_packages:
+        type: string
+        default: ""
+        description: "Pacotes pip inline, ex: 'numpy scipy matplotlib'. Ignorado se houver requirements.txt no repo."
       needs_r:
         type: boolean
         default: false
@@ -28,6 +35,9 @@ on:
       tinytex_packages:
         type: string
         default: "pgf pgfplots xcolor"
+      output_dir:
+        type: string
+        default: "_site"
 
 permissions:
   contents: read
@@ -61,12 +71,16 @@ jobs:
         if: ${{ inputs.needs_python }}
         uses: actions/setup-python@v5
         with:
-          python-version: "3.11"
+          python-version: ${{ inputs.python_version }}
 
       - name: Install Python dependencies
         if: ${{ inputs.needs_python }}
         run: |
-          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+          if [ -f requirements.txt ]; then
+            pip install -r requirements.txt
+          elif [ -n "${{ inputs.python_packages }}" ]; then
+            pip install ${{ inputs.python_packages }}
+          fi
 
       - name: Install R
         if: ${{ inputs.needs_r }}
@@ -98,11 +112,13 @@ jobs:
 
       - name: Render
         run: quarto render
+        env:
+          RETICULATE_PYTHON: ${{ inputs.needs_python && env.pythonLocation || '' }}/bin/python
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: _site
+          path: ${{ inputs.output_dir }}
 
       - name: Deploy to GitHub Pages
         id: deployment
