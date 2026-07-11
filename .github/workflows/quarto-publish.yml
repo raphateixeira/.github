@@ -96,12 +96,21 @@ jobs:
         if: ${{ inputs.needs_pdf2svg }}
         run: sudo apt-get update && sudo apt-get install -y pdf2svg
 
+      - name: Preparar lista de pacotes R
+        if: ${{ inputs.needs_r && inputs.r_packages != '' }}
+        id: rpkgs
+        run: |
+          {
+            echo "list<<EOF"
+            echo "${{ inputs.r_packages }}" | tr ',' '\n' | sed 's/^ *//;s/ *$//;s/^/any::/'
+            echo "EOF"
+          } >> "$GITHUB_OUTPUT"
+
       - name: Install R dependencies
         if: ${{ inputs.needs_r && inputs.r_packages != '' }}
-        run: |
-          install.packages(strsplit("${{ inputs.r_packages }}", ",\\s*")[[1]],
-                           repos = 'https://cran.r-project.org')
-        shell: Rscript {0}
+        uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          packages: ${{ steps.rpkgs.outputs.list }}
 
       - name: Install TinyTeX + pacotes TikZ
         if: ${{ inputs.needs_tinytex }}
