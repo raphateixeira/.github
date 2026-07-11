@@ -116,8 +116,10 @@ jobs:
         if: ${{ inputs.needs_tinytex }}
         run: |
           quarto install tinytex --no-prompt
-          ~/.TinyTeX/bin/x86_64-linux/tlmgr update --self
-          ~/.TinyTeX/bin/x86_64-linux/tlmgr install ${{ inputs.tinytex_packages }}
+          echo "$HOME/.TinyTeX/bin/x86_64-linux" >> "$GITHUB_PATH"
+          export PATH="$HOME/.TinyTeX/bin/x86_64-linux:$PATH"
+          tlmgr update --self
+          tlmgr install ${{ inputs.tinytex_packages }}
 
       - name: Render
         run: quarto render
