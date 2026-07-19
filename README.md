@@ -3,22 +3,18 @@
 Configurações e infraestrutura compartilhada entre os repositórios de
 disciplina de [@raphateixeira](https://github.com/raphateixeira).
 
-## `assets/rtx-palette.scss`
+## `assets/TemaRTx.scss`
 
-Paleta de cores e variáveis SCSS institucionais, única fonte de verdade.
-Cada repo de disciplina baixa a versão mais recente deste arquivo a cada
-build (veja o workflow abaixo) e importa suas variáveis no próprio tema
-local, mantendo apenas as customizações específicas daquele repo:
+Tema SCSS único (paleta, páginas HTML e apresentações revealjs), única
+fonte de verdade para todos os repos de disciplina/pesquisa. Cada repo
+mantém uma cópia local de `TemaRTx.scss` (para `quarto preview` funcionar
+offline) e referencia esse mesmo nome de arquivo no `theme:` de `_quarto.yml`
+(formato `html`) e de cada apresentação `revealjs`. A cada build, o workflow
+abaixo baixa a versão mais recente e sobrescreve a cópia local antes de
+renderizar — a versão publicada é sempre a canônica, mesmo que a cópia local
+do repo esteja desatualizada.
 
-```scss
-/*-- scss:defaults --*/
-@import "rtx-palette";
-
-/*-- scss:rules --*/
-// overrides específicos deste repo (ex: reveal.js, fonte de código, etc.)
-```
-
-Para editar a paleta institucional, edite `assets/rtx-palette.scss` aqui —
+Para editar o tema/paleta institucional, edite `assets/TemaRTx.scss` aqui —
 não em cópias locais nos outros repos.
 
 ## `.github/workflows/quarto-publish.yml`

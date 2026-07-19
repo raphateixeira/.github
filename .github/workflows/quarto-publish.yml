@@ -58,11 +58,11 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
 
-      - name: Baixar paleta compartilhada (rtx-palette.scss)
+      - name: Baixar tema compartilhado (TemaRTx.scss)
         run: |
           curl -fsSL \
-            https://raw.githubusercontent.com/raphateixeira/.github/main/assets/rtx-palette.scss \
-            -o rtx-palette.scss
+            https://raw.githubusercontent.com/raphateixeira/.github/main/assets/TemaRTx.scss \
+            -o TemaRTx.scss
 
       - name: Set up Quarto
         uses: quarto-dev/quarto-actions/setup@v2
