@@ -114,6 +114,8 @@ jobs:
 
       - name: Install TinyTeX + pacotes TikZ
         if: ${{ inputs.needs_tinytex }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           quarto install tinytex --no-prompt
           echo "$HOME/.TinyTeX/bin/x86_64-linux" >> "$GITHUB_PATH"
