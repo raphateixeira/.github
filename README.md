@@ -6,16 +6,16 @@ disciplina de [@raphateixeira](https://github.com/raphateixeira).
 ## `assets/TemaRTx.scss`
 
 Tema SCSS único (paleta, páginas HTML e apresentações revealjs), única
-fonte de verdade para todos os repos de disciplina/pesquisa. Cada repo
-mantém uma cópia local de `TemaRTx.scss` (para `quarto preview` funcionar
-offline) e referencia esse mesmo nome de arquivo no `theme:` de `_quarto.yml`
-(formato `html`) e de cada apresentação `revealjs`. A cada build, o workflow
-abaixo baixa a versão mais recente e sobrescreve a cópia local antes de
-renderizar — a versão publicada é sempre a canônica, mesmo que a cópia local
-do repo esteja desatualizada.
+fonte de verdade para todos os repos de disciplina/pesquisa. Os repos **não
+versionam** `TemaRTx.scss` (está no `.gitignore` de cada um): a cada build, o
+workflow abaixo baixa a versão canônica daqui antes de renderizar, então a
+versão publicada é sempre esta. Para o `quarto preview` local funcionar, cada
+repo precisa do arquivo na raiz; `scripts/atualizar-tema.sh` (rodar a partir de
+qualquer lugar) copia o tema para todos os repos de `GitRTx`.
 
 Para editar o tema/paleta institucional, edite `assets/TemaRTx.scss` aqui —
-não em cópias locais nos outros repos.
+não em cópias locais nos outros repos. Para testar antes de dar push, rode
+`scripts/atualizar-tema.sh --local`.
 
 ## `.github/workflows/quarto-publish.yml`
 
