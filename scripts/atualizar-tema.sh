@@ -13,6 +13,6 @@ else
 fi
 for d in */; do
   d=${d%/}
-  [ -f "$d/_quarto.yml" ] && [ "$d" != "raphateixeira.github.io" ] || continue
+  grep -qs "TemaRTx.scss" "$d/_quarto.yml" || continue   # só projetos que usam o tema
   cp "$src" "$d/TemaRTx.scss" && echo "tema atualizado: $d"
 done
