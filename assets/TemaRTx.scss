@@ -778,10 +778,10 @@ body {
         // !important necessário: o Quarto marca esta imagem com a classe
         // "r-stretch" (única imagem do slide), que define largura/altura
         // via estilo inline calculado em tempo de execução pelo Reveal.js.
-        width: 80px !important;
+        width: 190px !important;
         height: auto !important;
-        max-width: 80px !important;
-        max-height: 103px !important;
+        max-width: 190px !important;
+        max-height: 245px !important;
         margin: 0 auto $spacing-md auto;
         border-radius: 0;
     }
@@ -795,6 +795,14 @@ body {
         color: $heading-h2-color;
         font-weight: bold;
         font-size: 1.2em;
+    }
+
+    // Nome do autor em destaque (o 1º parágrafo do slide é o logo, então
+    // o destaque vai por classe: [Nome]{.encerramento-nome})
+    .encerramento-nome {
+        color: $heading-h2-color;
+        font-weight: bold;
+        font-size: 1.25em;
     }
 
     // E-mail: menor que o restante e com a cor/sublinhado padrão de link
