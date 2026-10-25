@@ -92,9 +92,9 @@ jobs:
         if: ${{ inputs.needs_magick_system_deps }}
         run: sudo apt-get update && sudo apt-get install -y libmagick++-dev ghostscript
 
-      - name: Install pdf2svg
+      - name: Install pdf2svg e poppler-utils
         if: ${{ inputs.needs_pdf2svg }}
-        run: sudo apt-get update && sudo apt-get install -y pdf2svg
+        run: sudo apt-get update && sudo apt-get install -y pdf2svg poppler-utils   # poppler: pdftoppm/pdftops (figuras TikZ)
 
       - name: Preparar lista de pacotes R
         if: ${{ inputs.needs_r && inputs.r_packages != '' }}
